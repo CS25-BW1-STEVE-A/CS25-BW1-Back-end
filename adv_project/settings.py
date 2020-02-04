@@ -14,8 +14,6 @@ import os
 from decouple import config
 import dj_database_url
 
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +36,7 @@ INSTALLED_APPS = [
     'adventure',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,6 +131,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
