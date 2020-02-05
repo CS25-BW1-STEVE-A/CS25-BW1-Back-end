@@ -19,9 +19,14 @@ from django.conf.urls import url
 
 from rest_framework.authtoken import views
 
+from adventure import api
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^login/', views.obtain_auth_token),
+    # re_path(r'^login/', views.obtain_auth_token),
+    re_path(r'^login/', include('rest_auth.urls')),
     path('', include('rest_auth.urls')),
     path('registration/', include('rest_auth.registration.urls')),
+    path('adv/init', api.initialize),
+    path('adv/move', api.move),
 ]
