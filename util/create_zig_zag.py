@@ -9,11 +9,11 @@ Fill up the grid, bottom to top, in a zig-zag pattern
 '''
 
 # Initialize the grid
-grid = [None] * 3
-width = 3
-height = 3
+grid = [None] * 10
+width = 10
+height = 10
 for i in range(len(grid)):
-    grid[i] = [None] * 3
+    grid[i] = [None] * 10
 
 # Start from lower-left corner (0,0)
 x = -1  # (this will become 0 on the first step)
@@ -25,10 +25,10 @@ direction = 1  # 1: east, -1: west
 
 # While there are rooms to be created...
 previous_room = None
-while room_count < 5:
+while room_count < 100:
 
     # Calculate the direction of the room to be created
-    if direction > 0 and x < 3 - 1:
+    if direction > 0 and x < 10 - 1:
         room_direction = "e"
         room_rev_dir = "w"
         x += 1
@@ -63,5 +63,5 @@ while room_count < 5:
   
 players=Player.objects.all()
 for p in players:
-  p.currentRoom=r_outside.id
+  p.currentRoom=Room.objects.all()[0].id
   p.save()
