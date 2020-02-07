@@ -31,6 +31,7 @@ urlpatterns = [
     path('adv/init', api.initialize),
     path('adv/move', api.move),
     path('adv/rooms', api.rooms),
+    path('adv/rows', api.rows),
     path('csrf/', views.csrf),
     path('ping/', views.ping),
 ]
