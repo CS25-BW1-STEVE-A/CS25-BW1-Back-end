@@ -90,7 +90,7 @@ def rows(request):
         y = room.y
         x = room.x
 
-        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": x }
+        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": x, "coordinates": [y,x] }
 
         rowsArr[y][x] = roomObj
 
