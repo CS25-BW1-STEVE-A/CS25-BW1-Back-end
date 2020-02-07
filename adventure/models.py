@@ -42,9 +42,23 @@ class Room(models.Model):
     def playerUUIDs(self, currentPlayerID):
         return [p.uuid for p in Player.objects.filter(currentRoom=self.id) if p.id != int(currentPlayerID)]
 
-        #all players in room
+    #all players in room
     def allPlayers(self):
         return [p.user.username for p in Player.objects.filter(currentRoom=self.id)]
+
+    #exits array
+    def getExits(self):
+        exits = []
+        if self.n_to:
+            exits.append("north")
+        if self.s_to:
+            exits.append("south")
+        if self.e_to:
+            exits.append("east")
+        if self.w_to:
+            exits.append("west")
+        
+        return exits
 
 
 class Player(models.Model):
