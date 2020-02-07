@@ -20,6 +20,7 @@ from django.conf.urls import url
 from rest_framework.authtoken import views
 
 from adventure import api
+from adventure import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,8 @@ urlpatterns = [
     path('registration/', include('rest_auth.registration.urls')),
     path('adv/init', api.initialize),
     path('adv/move', api.move),
+    path('adv/rooms', api.rooms),
+    path('adv/rows', api.rows),
+    path('csrf/', views.csrf),
+    path('ping/', views.ping),
 ]

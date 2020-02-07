@@ -59,6 +59,43 @@ def move(request):
         return JsonResponse({'name':player.user.username, 'title':room.title, 'description':room.description, 'players':players, 'error_msg':"You cannot move that way."}, safe=True)
 
 
+@csrf_exempt
+@api_view(["GET"])
+def rooms(request):
+    roomsData = Room.objects.all()
+    rooms = []
+    for room in roomsData:
+        name = room.title
+        description = room.description
+        players = room.allPlayers()
+        exits = room.getExits()
+        roomId = room.id
+
+        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId }
+        rooms.append(roomObj)
+
+    return JsonResponse({'rooms':rooms})
+
+@csrf_exempt
+@api_view(["GET"])
+def rows(request):
+    roomsData = Room.objects.all()
+    rowsArr = [[None for i in range(10)] for i in range(10)]
+    for room in roomsData:
+        name = room.title
+        description = room.description
+        players = room.allPlayers()
+        exits = room.getExits()
+        roomId = room.id
+        y = 9 - room.y
+        x = room.x
+
+        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": x, "coordinates": [y,x] }
+
+        rowsArr[y][x] = roomObj
+
+    return JsonResponse({'rooms':rowsArr})
+
 # # @csrf_exempt
 # @api_view(["POST"])
 # def say(request):
