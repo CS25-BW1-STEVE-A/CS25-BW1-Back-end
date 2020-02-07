@@ -68,16 +68,7 @@ def rooms(request):
         name = room.title
         description = room.description
         players = room.allPlayers()
-        exits = []
-        if room.n_to:
-            exits.append("north")
-        if room.s_to:
-            exits.append("south")
-        if room.e_to:
-            exits.append("east")
-        if room.w_to:
-            exits.append("west")
-
+        exits = room.getExits()
         roomId = room.id
 
         roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId }
@@ -94,22 +85,12 @@ def rows(request):
         name = room.title
         description = room.description
         players = room.allPlayers()
-        exits = []
-        if room.n_to:
-            exits.append("north")
-        if room.s_to:
-            exits.append("south")
-        if room.e_to:
-            exits.append("east")
-        if room.w_to:
-            exits.append("west")
-
+        exits = room.getExits()
         roomId = room.id
-
-        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId }
-        
         y = room.y
         x = room.x
+
+        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": x }
 
         rowsArr[y][x] = roomObj
 
