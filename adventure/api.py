@@ -90,9 +90,9 @@ def rows(request):
         y = room.y
         x = room.x
 
-        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": -x, "coordinates": [y,9-x] }
+        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": -x, "coordinates": [9-y,x] }
 
-        rowsArr[y][x] = roomObj
+        rowsArr[9-y][x] = roomObj
 
     return JsonResponse({'rooms':rowsArr})
 
