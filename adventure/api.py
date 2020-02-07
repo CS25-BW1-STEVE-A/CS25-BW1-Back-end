@@ -85,7 +85,35 @@ def rooms(request):
 
     return JsonResponse({'rooms':rooms})
 
+@csrf_exempt
+@api_view(["GET"])
+def rows(request):
+    roomsData = Room.objects.all()
+    rowsArr = [[None for i in range(10)] for i in range(10)]
+    for room in roomsData:
+        name = room.title
+        description = room.description
+        players = room.allPlayers()
+        exits = []
+        if room.n_to:
+            exits.append("north")
+        if room.s_to:
+            exits.append("south")
+        if room.e_to:
+            exits.append("east")
+        if room.w_to:
+            exits.append("west")
 
+        roomId = room.id
+
+        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId }
+        
+        y = room.y
+        x = room.x
+
+        rowsArr[y][x] = roomObj
+
+    return JsonResponse({'rooms':rowsArr})
 
 # # @csrf_exempt
 # @api_view(["POST"])
