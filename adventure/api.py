@@ -87,12 +87,12 @@ def rows(request):
         players = room.allPlayers()
         exits = room.getExits()
         roomId = room.id
-        y = room.y
+        y = 9 - room.y
         x = room.x
 
-        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": -x, "coordinates": [9-y,x] }
+        roomObj = {"name": name, "description": description, "players": players, "exits": exits, "id": roomId, "rowId": y, "colId": x, "coordinates": [y,x] }
 
-        rowsArr[9-y][x] = roomObj
+        rowsArr[y][x] = roomObj
 
     return JsonResponse({'rooms':rowsArr})
 
